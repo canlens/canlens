@@ -134,6 +134,105 @@
   align-items: center;
   gap: 1rem;
 }
+
+/* --- Language Switcher --- */
+.language-switcher-container {
+  position: relative;
+  display: inline-block;
+}
+
+.language-switcher-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--canlens-light-gray);
+  color: var(--color-white);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.language-switcher-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.lang-globe-icon {
+  color: var(--canlens-silver);
+}
+
+.lang-text {
+  font-size: 14px;
+}
+
+.lang-chevron-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--canlens-silver);
+}
+
+.language-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--canlens-dark-gray);
+  border: 1px solid var(--canlens-light-gray);
+  border-radius: 4px;
+  padding: 4px 0;
+  min-width: 140px;
+  z-index: 50;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.language-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.language-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.language-dropdown-item.active {
+  background: rgba(63, 175, 248, 0.1);
+  color: var(--canlens-blue);
+}
+
+[dir="rtl"] .language-dropdown-item {
+  text-align: right;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .lang-text, .lang-chevron-icon {
+    display: none;
+  }
+  .language-switcher-btn {
+    border: none;
+    padding: 4px;
+    background: transparent;
+  }
+  .language-switcher-btn:hover {
+    background: transparent;
+  }
+  .lang-globe-icon {
+    color: var(--color-white);
+  }
+}
+
 .nav-action-btn {
   color: var(--color-white);
 }
@@ -141,6 +240,7 @@
   color: var(--canlens-blue);
   background-color: rgba(255, 255, 255, 0.05);
 }
+
 .nav-badge {
   position: absolute;
   top: -0.25rem;
