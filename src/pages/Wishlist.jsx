@@ -97,7 +97,6 @@ export function Wishlist() {
                     <Button
                       size="sm"
                       onClick={() => handleAddToCart(product)}
-                      disabled={!product.inStock}
                       className="wishlist-add-btn"
                     >
                       <ShoppingCart className="icon-sm wishlist-btn-icon-mr" />

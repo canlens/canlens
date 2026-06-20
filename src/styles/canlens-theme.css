@@ -2,7 +2,7 @@
 
 :root {
   /* Premium Black & White Palette */
-  --canlens-black: #010102;
+  --canlens-black: #000000;
   --canlens-near-black: #0F1115;
   --canlens-dark-gray: #171A20;
   --canlens-medium-gray: #271C33;
@@ -13,10 +13,10 @@
   --canlens-white: #ffffff;
   
   /* Accent Colors */
-  --canlens-blue: #3FAFF8;
-  --canlens-blue-light: #7FC7FF;
-  --canlens-blue-dark: #525C7F;
-  --canlens-pink: #F048B0;
+  --canlens-blue: #4BB5F5;
+  --canlens-blue-light: #5CC6FF;
+  --canlens-blue-dark: #3AA4E4;
+  --canlens-accent: #4BB5F5;
   
   /* Glassmorphism */
   --glass-bg: rgba(255, 255, 255, 0.05);
@@ -223,5 +223,22 @@ html {
   
   :root {
     --section-padding: 4rem;
+  }
+}
+
+/* Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--canlens-blue);
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

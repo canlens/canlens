@@ -4,12 +4,16 @@ import { ArrowRight, Camera, Video, Lightbulb, Users, Award, TrendingUp, Star, Q
 import { useTranslation } from 'react-i18next';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { products } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 import '../styles/home.css';
 
 export function Home() {
   const { t } = useTranslation();
-  const featuredProducts = products.slice(0, 4);
+  const { products, isLoading } = useProducts();
+  const featuredProducts = products.filter(p => p.featured).slice(0, 4);
+  if (featuredProducts.length === 0) {
+    featuredProducts.push(...products.slice(0, 4));
+  }
 
   const stats = [
     { label: t('home.stats.happy_clients'), value: '500+', icon: Users },
@@ -189,21 +193,25 @@ export function Home() {
                   <Card className="premium-card product-card">
                     <div className="product-image-wrapper">
                       <img
-                        src={product.image}
+                        src={product.image || product.imageUrl}
                         alt={product.name}
                         className="product-image"
                       />
                     </div>
                     <div className="product-content">
-                      <p className="product-brand">{product.brand}</p>
+                      <p className="product-brand">{product.brand || product.storeName || 'Global'}</p>
                       <h3 className="product-name">
                         {product.name}
                       </h3>
                       <div className="product-meta">
-                        <span className="product-price">${product.price.toLocaleString()}</span>
+                        {product.productUrl ? (
+                           <span className="product-price">Global Product</span>
+                        ) : (
+                           <span className="product-price">${product.price?.toLocaleString()}</span>
+                        )}
                         <div className="product-rating">
                           <Star className="star-icon" />
-                          <span>{product.rating}</span>
+                          <span>{product.rating || 'New'}</span>
                         </div>
                       </div>
                     </div>

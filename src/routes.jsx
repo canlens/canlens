@@ -8,6 +8,7 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { Cart } from './pages/Cart';
 import { Wishlist } from './pages/Wishlist';
+import { ProductDetails } from './pages/ProductDetails';
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'shop', element: <Shop /> },
+      { path: 'shop/:id', element: <ProductDetails /> },
       { path: 'studio-rental', element: <StudioRental /> },
       { path: 'portfolio', element: <Portfolio /> },
       { path: 'about', element: <About /> },

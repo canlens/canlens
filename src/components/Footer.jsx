@@ -97,7 +97,7 @@ export function Footer() {
             </div>
           </div>
           <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '14px', color: 'var(--canlens-silver)' }}>
-            {t('footer.developed_by')} <a href="https://mustafa-khamis.sudanteach.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--canlens-blue)', textDecoration: 'none' }}>Mustafa khamis</a>
+            {t('footer.developed_by')} <a href="https://mustafakhamis.dev/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--canlens-blue)', textDecoration: 'none' }}>Mustafa khamis</a>
           </div>
         </div>
       </div>

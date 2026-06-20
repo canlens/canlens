@@ -278,9 +278,9 @@
 .mobile-menu-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .mobile-menu-drawer {
   position: absolute;

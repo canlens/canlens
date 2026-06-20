@@ -13,8 +13,19 @@ export function Cart() {
   const { cart, removeFromCart, updateCartQuantity, cartTotal, clearCart } = useApp();
 
   const handleCheckout = () => {
+    let message = `*New Order from CanLens*\n\n`;
+    cart.forEach((item, index) => {
+      message += `${index + 1}. ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toLocaleString()}\n`;
+    });
+    message += `\n*Total:* $${(cartTotal * 1.18).toLocaleString()}`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/201222444666?text=${encodedMessage}`;
+    
     toast.success(t('cart.toast_checkout'));
     clearCart();
+    
+    window.open(whatsappUrl, '_blank');
   };
 
   if (cart.length === 0) {

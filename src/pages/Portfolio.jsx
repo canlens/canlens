@@ -1,79 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
+import { getPortfolioItems } from '../services/googleSheetsApi';
 import '../styles/portfolio.css';
-
-const projects = [
-  {
-    id: 1,
-    title: 'Luxury Fashion Campaign',
-    category: 'Commercial',
-    image: 'https://images.unsplash.com/photo-1587050265310-1a2d98ccce5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tZXJjaWFsJTIwcGhvdG9ncmFwaHklMjBwb3J0Zm9saW8lMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzgwMTQ1MzU4fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'High-end fashion photography for international brand',
-  },
-  {
-    id: 2,
-    title: 'Tech Product Launch',
-    category: 'Commercial',
-    image: 'https://images.unsplash.com/photo-1545242640-7c9e9cc07d23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9kdWN0JTIwcGhvdG9ncmFwaHklMjBzdHVkaW8lMjBjb21tZXJjaWFsfGVufDF8fHx8MTc4MDE0NTM1OXww&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Product photography and video for tech startup',
-  },
-  {
-    id: 3,
-    title: 'Wedding Celebration',
-    category: 'Events',
-    image: 'https://images.unsplash.com/photo-1714972383570-44ddc9738355?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxldmVudCUyMHBob3RvZ3JhcGh5JTIwd2VkZGluZyUyMGNlbGVicmF0aW9ufGVufDF8fHx8MTc4MDE0NTM1OHww&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Full day wedding photography and videography',
-  },
-  {
-    id: 4,
-    title: 'Corporate Portraits',
-    category: 'Commercial',
-    image: 'https://images.unsplash.com/photo-1551135049-8a33b5883817?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3Jwb3JhdGUlMjB0ZWFtJTIwYnVzaW5lc3MlMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzgwMTQ1MzU5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Executive headshots for Fortune 500 company',
-  },
-  {
-    id: 5,
-    title: 'Documentary Series',
-    category: 'Content Creation',
-    image: 'https://images.unsplash.com/photo-1520390138845-fd2d229dd553?w=800&q=80',
-    description: 'Multi-episode documentary about Rwandan entrepreneurs',
-  },
-  {
-    id: 6,
-    title: 'Music Video Production',
-    category: 'Content Creation',
-    image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80',
-    description: 'Full production for emerging artist',
-  },
-  {
-    id: 7,
-    title: 'Restaurant Brand Shoot',
-    category: 'Commercial',
-    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
-    description: 'Food photography and restaurant interior shots',
-  },
-  {
-    id: 8,
-    title: 'Conference Coverage',
-    category: 'Events',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
-    description: 'Multi-day tech conference photo and video coverage',
-  },
-];
 
 const categories = ['All', 'Commercial', 'Events', 'Content Creation'];
 
 export function Portfolio() {
   const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const data = await getPortfolioItems();
+        setItems(data);
+      } catch (err) {
+        console.error('Failed to load portfolio items', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    load();
+  }, []);
 
   const filteredProjects = selectedCategory === 'All'
-    ? projects
-    : projects.filter((p) => p.category === selectedCategory);
+    ? items
+    : items.filter((p) => p.category === selectedCategory);
 
   const getCategoryTranslation = (cat) => {
     switch(cat) {
@@ -122,6 +80,13 @@ export function Portfolio() {
           ))}
         </div>
 
+        {isLoading && (
+          <div className="py-20 flex flex-col items-center justify-center">
+            <div className="spinner mb-4"></div>
+            <p className="text-white/70">{t('common.loading', 'Loading portfolio items...')}</p>
+          </div>
+        )}
+
         {/* Projects Grid */}
         <div className="portfolio-grid">
           {filteredProjects.map((project, index) => (
@@ -134,7 +99,7 @@ export function Portfolio() {
               <Card className="premium-card portfolio-card group cursor-pointer">
                 <div className="portfolio-image-wrapper">
                   <img
-                    src={project.image}
+                    src={project.imageUrl}
                     alt={project.title}
                     className="portfolio-image"
                   />

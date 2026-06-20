@@ -14,7 +14,8 @@ import {
   SelectValue,
 } from '../components/ui/select';
 import { Badge } from '../components/ui/badge';
-import { products, categories, brands } from '../data/products';
+import { categories, brands } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
 import '../styles/shop.css';
@@ -27,12 +28,13 @@ export function Shop() {
   const [sortBy, setSortBy] = useState('featured');
   const [viewMode, setViewMode] = useState('grid');
   const { addToCart, addToWishlist, wishlist } = useApp();
+  const { products, isLoading, error } = useProducts();
 
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const searchString = (product.name + ' ' + (product.description || '') + ' ' + (product.storeName || '')).toLowerCase();
+    const matchesSearch = searchString.includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    const matchesBrand = selectedBrand === 'All' || product.brand === selectedBrand;
+    const matchesBrand = selectedBrand === 'All' || product.brand === selectedBrand || product.storeName === selectedBrand;
     return matchesSearch && matchesCategory && matchesBrand;
   });
 
@@ -89,8 +91,20 @@ export function Shop() {
       </section>
 
       <div className="container-premium py-12">
-        {/* Filters & Search */}
-        <div className="shop-filters-wrapper">
+        {isLoading && (
+          <div className="py-20 flex flex-col items-center justify-center">
+            <div className="spinner mb-4"></div>
+            <p className="text-white/70">{t('common.loading', 'Loading...')}</p>
+          </div>
+        )}
+        
+        {error && (
+          <div className="py-20 text-center text-red-500">Error: {error}</div>
+        )}
+
+        {!isLoading && !error && (
+          <>
+          <div className="shop-filters-wrapper">
           <div className="shop-filters-top">
             {/* Search */}
             <div className="shop-search-wrapper">
@@ -214,15 +228,11 @@ export function Shop() {
                   <Card className="premium-card shop-product-card group cursor-pointer h-full">
                     <div className="shop-product-image-wrapper">
                       <img
-                        src={product.image}
+                        src={product.image || product.imageUrl}
                         alt={product.name}
                         className="shop-product-image"
                       />
-                      {!product.inStock && (
-                        <div className="shop-out-of-stock">
-                          <Badge variant="destructive">{t('shop.out_of_stock')}</Badge>
-                        </div>
-                      )}
+
                       <Button
                         size="icon"
                         variant="ghost"
@@ -235,7 +245,7 @@ export function Shop() {
                     <div className="shop-product-content">
                       <div className="shop-product-meta-top">
                         <Badge variant="secondary" className="shop-brand-badge">
-                          {product.brand}
+                          {product.brand || product.storeName || 'Global'}
                         </Badge>
                         <div className="shop-product-rating">
                           <Star className="shop-star-icon" />
@@ -245,18 +255,31 @@ export function Shop() {
                       <h3 className="shop-product-title">
                         {product.name}
                       </h3>
-                      <p className="shop-product-desc">{product.description}</p>
+                      <p className="shop-product-desc">{product.description || product.storeName}</p>
                       <div className="shop-product-footer">
-                        <span className="shop-product-price">${product.price.toLocaleString()}</span>
-                        <Button
-                          size="sm"
-                          onClick={(e) => handleAddToCart(product, e)}
-                          disabled={!product.inStock}
-                          className="shop-add-btn"
-                        >
-                          <ShoppingCart className="icon-sm shop-btn-icon-mr" />
-                          {t('shop.add')}
-                        </Button>
+                        {product.productUrl ? (
+                          <div className="w-full mt-auto">
+                            <Button
+                              size="sm"
+                              className="shop-add-btn w-full"
+                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(product.productUrl, '_blank'); }}
+                            >
+                              View Product
+                            </Button>
+                          </div>
+                        ) : (
+                          <>
+                            <span className="shop-product-price">${product.price?.toLocaleString()}</span>
+                            <Button
+                              size="sm"
+                              onClick={(e) => handleAddToCart(product, e)}
+                              className="shop-add-btn"
+                            >
+                              <ShoppingCart className="icon-sm shop-btn-icon-mr" />
+                              {t('shop.add')}
+                            </Button>
+                          </>
+                        )}
                       </div>
                     </div>
                   </Card>
@@ -277,7 +300,7 @@ export function Shop() {
                   <Card className="premium-card shop-list-card group cursor-pointer">
                     <div className="shop-list-image-wrapper">
                       <img
-                        src={product.image}
+                        src={product.image || product.imageUrl}
                         alt={product.name}
                         className="shop-list-image"
                       />
@@ -286,7 +309,7 @@ export function Shop() {
                       <div className="shop-list-header">
                         <div>
                           <Badge variant="secondary" className="shop-brand-badge mb-2">
-                            {product.brand}
+                            {product.brand || product.storeName || 'Global'}
                           </Badge>
                           <h3 className="shop-list-title">
                             {product.name}
@@ -297,7 +320,7 @@ export function Shop() {
                           <span className="shop-rating-text-lg">{product.rating}</span>
                         </div>
                       </div>
-                      <p className="shop-list-desc">{product.description}</p>
+                      <p className="shop-list-desc">{product.description || product.storeName}</p>
                       {product.specs && (
                         <div className="shop-list-specs">
                           {Object.entries(product.specs).slice(0, 4).map(([key, value]) => (
@@ -309,25 +332,45 @@ export function Shop() {
                         </div>
                       )}
                       <div className="shop-list-footer">
-                        <span className="shop-list-price">${product.price.toLocaleString()}</span>
-                        <div className="shop-list-actions">
-                          <Button
-                            size="icon"
-                            variant="outline"
-                            onClick={(e) => handleAddToWishlist(product, e)}
-                            className="shop-list-wishlist-btn"
-                          >
-                            <Heart className={`icon-sm ${wishlist.some(item => item.id === product.id) ? 'shop-wishlist-active' : ''}`} />
-                          </Button>
-                          <Button
-                            onClick={(e) => handleAddToCart(product, e)}
-                            disabled={!product.inStock}
-                            className="shop-add-btn"
-                          >
-                            <ShoppingCart className="icon-sm shop-btn-icon-mr" />
-                            {t('shop.add_to_cart')}
-                          </Button>
-                        </div>
+                        {product.productUrl ? (
+                          <div className="shop-list-actions w-full justify-end">
+                            <Button
+                              size="icon"
+                              variant="outline"
+                              onClick={(e) => handleAddToWishlist(product, e)}
+                              className="shop-list-wishlist-btn"
+                            >
+                              <Heart className={`icon-sm ${wishlist.some(item => item.id === product.id) ? 'shop-wishlist-active' : ''}`} />
+                            </Button>
+                            <Button
+                              className="shop-add-btn"
+                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(product.productUrl, '_blank'); }}
+                            >
+                              View Product
+                            </Button>
+                          </div>
+                        ) : (
+                          <>
+                            <span className="shop-list-price">${product.price?.toLocaleString()}</span>
+                            <div className="shop-list-actions">
+                              <Button
+                                size="icon"
+                                variant="outline"
+                                onClick={(e) => handleAddToWishlist(product, e)}
+                                className="shop-list-wishlist-btn"
+                              >
+                                <Heart className={`icon-sm ${wishlist.some(item => item.id === product.id) ? 'shop-wishlist-active' : ''}`} />
+                              </Button>
+                              <Button
+                                onClick={(e) => handleAddToCart(product, e)}
+                                className="shop-add-btn"
+                              >
+                                <ShoppingCart className="icon-sm shop-btn-icon-mr" />
+                                {t('shop.add_to_cart')}
+                              </Button>
+                            </div>
+                          </>
+                        )}
                       </div>
                     </div>
                   </Card>
@@ -351,6 +394,8 @@ export function Shop() {
               {t('shop.clear_filters')}
             </Button>
           </div>
+        )}
+        </>
         )}
       </div>
     </div>
