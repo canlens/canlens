@@ -9,27 +9,27 @@ export function About() {
 
   const team = [
     {
-      name: 'Eric Mugabo',
+      name: 'Mutasim Adam',
       role: t('about.role_founder'),
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
+      image: 'images/team/ceoMutasim.png',
       bio: t('about.bio_founder'),
     },
     {
       name: 'Grace Uwase',
       role: t('about.role_creative'),
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
+      image: 'images/team/cmoUwase.png',
       bio: t('about.bio_creative'),
     },
     {
       name: 'Patrick Niyonzima',
       role: t('about.role_technical'),
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80',
+      image: 'images/team/ctoPatrick.png',
       bio: t('about.bio_technical'),
     },
     {
       name: 'Diane Mutesi',
       role: t('about.role_studio'),
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80',
+      image: 'images/team/cooDiane.png',
       bio: t('about.bio_studio'),
     },
   ];
