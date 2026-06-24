@@ -69,9 +69,7 @@ export function About() {
                 <p>
                   {t('about.story_p2')}
                 </p>
-                <p>
-                  {t('about.story_p3')}
-                </p>
+                
               </div>
             </motion.div>
 

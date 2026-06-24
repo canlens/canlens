@@ -229,11 +229,12 @@
   }
   .service-card {
     flex-direction: column;
-    height: 500px;
+    height: 100%;
     gap: 2em;
     width: 100%;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
+    padding:2rem 1rem;
   }
   .service-images {
     display: flex;
@@ -241,8 +242,10 @@
     justify-content: flex-end;
     padding: 0px;
     height: 100px;
+    width: 100%;
     margin-top: 50px;
   }
+  
 }
 
 .service-card-icons {

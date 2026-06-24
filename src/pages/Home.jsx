@@ -145,7 +145,7 @@ export function Home() {
                   <div className="service-image-overlay"></div>
                   <img
                     className="service-image s"
-                    src="images/background-full.png"
+                    src="images/content2.jpeg"
                     alt=""
                   />
                 </div>
@@ -171,7 +171,7 @@ export function Home() {
                   </p>
                 </div>
                 <div className="service-images">
-                 <div className="service-image-overlay"></div>
+                  <div className="service-image-overlay"></div>
                   <img
                     className="service-image s"
                     src="images/studio3.jpeg"
@@ -200,7 +200,7 @@ export function Home() {
                   </p>
                 </div>
                 <div className="service-images">
-                 <div className="service-image-overlay"></div>
+                  <div className="service-image-overlay"></div>
                   <img
                     className="service-image s"
                     src="images/content3.jpeg"
