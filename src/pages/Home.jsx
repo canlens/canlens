@@ -258,7 +258,7 @@ export function Home() {
                           <span className="product-price">Global Product</span>
                         ) : (
                           <span className="product-price">
-                            ${product.price?.toLocaleString()}
+                            {product.price?.toLocaleString()} RWF
                           </span>
                         )}
                         <div className="product-rating">

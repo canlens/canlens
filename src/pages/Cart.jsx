@@ -15,9 +15,9 @@ export function Cart() {
   const handleCheckout = () => {
     let message = `*New Order from CanLens*\n\n`;
     cart.forEach((item, index) => {
-      message += `${index + 1}. ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toLocaleString()}\n`;
+      message += `${index + 1}. ${item.name} (x${item.quantity}) - ${(item.price * item.quantity).toLocaleString()} RWF\n`;
     });
-    message += `\n*Total:* $${(cartTotal * 1.18).toLocaleString()}`;
+    message += `\n*Total:* ${(cartTotal * 1.18).toLocaleString()} RWF`;
     
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/201222444666?text=${encodedMessage}`;
@@ -129,10 +129,10 @@ export function Cart() {
 
                         <div className="cart-item-pricing">
                           <p className="cart-item-unit-price">
-                            ${item.price.toLocaleString()} {t('cart.each')}
+                            {item.price.toLocaleString()} RWF {t('cart.each')}
                           </p>
                           <p className="cart-item-total-price">
-                            ${(item.price * item.quantity).toLocaleString()}
+                            {(item.price * item.quantity).toLocaleString()} RWF
                           </p>
                         </div>
                       </div>
@@ -155,7 +155,7 @@ export function Cart() {
                 <div className="cart-summary-lines">
                   <div className="cart-summary-line">
                     <span>{t('cart.subtotal')}</span>
-                    <span>${cartTotal.toLocaleString()}</span>
+                    <span>{cartTotal.toLocaleString()} RWF</span>
                   </div>
                   <div className="cart-summary-line">
                     <span>{t('cart.shipping')}</span>
@@ -163,13 +163,13 @@ export function Cart() {
                   </div>
                   <div className="cart-summary-line">
                     <span>{t('cart.tax')}</span>
-                    <span>${(cartTotal * 0.18).toLocaleString()}</span>
+                    <span>{(cartTotal * 0.18).toLocaleString()} RWF</span>
                   </div>
                   <div className="cart-summary-divider" />
                   <div className="cart-summary-total">
                     <span>{t('cart.total')}</span>
                     <span className="cart-summary-total-val">
-                      ${(cartTotal * 1.18).toLocaleString()}
+                      {(cartTotal * 1.18).toLocaleString()} RWF
                     </span>
                   </div>
                 </div>

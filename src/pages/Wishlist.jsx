@@ -93,7 +93,7 @@ export function Wishlist() {
                   </Link>
                   <p className="wishlist-product-desc">{product.description}</p>
                   <div className="wishlist-product-footer">
-                    <span className="wishlist-product-price">${product.price.toLocaleString()}</span>
+                    <span className="wishlist-product-price">{product.price.toLocaleString()} RWF</span>
                     <Button
                       size="sm"
                       onClick={() => handleAddToCart(product)}

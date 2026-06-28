@@ -269,7 +269,7 @@ export function Shop() {
                           </div>
                         ) : (
                           <>
-                            <span className="shop-product-price">${product.price?.toLocaleString()}</span>
+                            <span className="shop-product-price">{product.price?.toLocaleString()} RWF</span>
                             <Button
                               size="sm"
                               onClick={(e) => handleAddToCart(product, e)}
@@ -351,7 +351,7 @@ export function Shop() {
                           </div>
                         ) : (
                           <>
-                            <span className="shop-list-price">${product.price?.toLocaleString()}</span>
+                            <span className="shop-list-price">{product.price?.toLocaleString()} RWF</span>
                             <div className="shop-list-actions">
                               <Button
                                 size="icon"

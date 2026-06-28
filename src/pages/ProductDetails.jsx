@@ -63,25 +63,25 @@ export function ProductDetails() {
   return (
     <div className="shop-page pt-100">
       <div className="container-premium py-12">
-        <Link to="/shop" className="inline-flex items-center text-primary hover:text-primary/80 mb-8 transition-colors">
+        <Link to="/shop" className="back-to-shop-link">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Shop
         </Link>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="product-details-container">
           {/* Image Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="product-details-image-container bg-muted rounded-2xl overflow-hidden aspect-square flex items-center justify-center p-8 relative"
+            className="product-details-image-card"
           >
             <img
               src={product.image || product.imageUrl}
               alt={product.name}
-              className="w-full h-full object-contain"
+              className="product-details-image"
             />
             {isGlobal && (
-              <Badge className="absolute top-4 right-4 bg-primary text-white">Global Product</Badge>
+              <Badge className="absolute top-4 right-4 shop-brand-badge">Global Product</Badge>
             )}
           </motion.div>
 
@@ -89,74 +89,72 @@ export function ProductDetails() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex flex-col"
+            className="product-details-info"
           >
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <Badge variant="secondary" className="text-sm font-medium">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <Badge className="shop-brand-badge">
                   {product.brand || product.storeName || product.category || 'Product'}
                 </Badge>
-                <div className="flex items-center text-amber-500">
-                  <Star className="w-5 h-5 fill-current" />
-                  <span className="ml-1 text-sm font-medium text-foreground">{product.rating || '4.5'}</span>
+                <div className="shop-product-rating">
+                  <Star className="shop-star-icon-lg" />
+                  <span className="shop-rating-text-lg font-medium ml-1">{product.rating || '4.5'}</span>
                 </div>
               </div>
-              <h1 className="text-4xl font-bold tracking-tight mb-4">{product.name}</h1>
+              <h1 className="product-details-title">{product.name}</h1>
               {!isGlobal && (
-                <div className="text-3xl font-semibold text-primary mb-6">
-                  ${product.price?.toLocaleString() || '0'}
+                <div className="product-details-price">
+                  {product.price?.toLocaleString() || '0'} RWF
                 </div>
               )}
             </div>
 
-            <div className="prose prose-sm dark:prose-invert mb-8 text-muted-foreground whitespace-pre-wrap">
+            <p className="product-details-desc">
               {product.description || 'No description available for this product.'}
-            </div>
+            </p>
 
             {/* Actions */}
-            <div className="flex flex-col gap-4 mt-auto">
-              <div className="flex gap-4">
-                {isGlobal ? (
-                  <Button
-                    className="flex-1 h-14 text-lg bg-primary hover:bg-primary/90 text-white shadow-lg"
-                    onClick={() => window.open(product.productUrl, '_blank')}
-                  >
-                    View on {product.storeName || 'Store'}
-                  </Button>
-                ) : (
-                  <Button
-                    className="flex-1 h-14 text-lg bg-primary hover:bg-primary/90 text-white shadow-lg"
-                    onClick={handleAddToCart}
-                  >
-                    <ShoppingCart className="w-5 h-5 mr-2" />
-                    Add to Cart
-                  </Button>
-                )}
+            <div className="product-details-actions">
+              {isGlobal ? (
                 <Button
-                  variant="outline"
-                  size="icon"
-                  className="h-14 w-14 border-2"
-                  onClick={handleAddToWishlist}
+                  className="product-details-btn shop-add-btn"
+                  onClick={() => window.open(product.productUrl, '_blank')}
                 >
-                  <Heart className={`w-6 h-6 ${wishlist.some((item) => item.id === product.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                  View on {product.storeName || 'Store'}
                 </Button>
-              </div>
+              ) : (
+                <Button
+                  className="product-details-btn shop-add-btn"
+                  onClick={handleAddToCart}
+                >
+                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  Add to Cart
+                </Button>
+              )}
+              <Button
+                variant="outline"
+                size="icon"
+                className="product-details-wishlist-btn"
+                onClick={handleAddToWishlist}
+              >
+                <Heart className={`w-6 h-6 ${wishlist.some((item) => item.id === product.id) ? 'shop-wishlist-active' : ''}`} />
+              </Button>
             </div>
 
             {/* Features */}
             {!isGlobal && (
-              <div className="grid grid-cols-2 gap-4 mt-12 pt-8 border-t border-border">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+              <div className="product-details-features">
+                <div className="product-feature-item">
+                  <div className="product-feature-icon-wrapper">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
-                  <div className="text-sm font-medium">Secure Payment</div>
+                  <div className="product-feature-text">Secure Payment</div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <div className="product-feature-item">
+                  <div className="product-feature-icon-wrapper">
                     <Truck className="w-5 h-5" />
                   </div>
-                  <div className="text-sm font-medium">Fast Delivery</div>
+                  <div className="product-feature-text">Fast Delivery</div>
                 </div>
               </div>
             )}

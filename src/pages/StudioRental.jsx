@@ -140,7 +140,7 @@ export function StudioRental() {
                         </div>
                       </div>
                       <Badge className="studio-price-badge">
-                        ${studio.hourlyRate}/hr
+                        {studio.priceDisplay}
                       </Badge>
                     </div>
 
@@ -150,13 +150,16 @@ export function StudioRental() {
                     <div className="studio-equipment-section">
                       <h3 className="studio-equipment-title">{t('studio.equipment_included')}</h3>
                       <div className="studio-equipment-grid">
-                        {studio.equipment.map((item) => (
-                          <div key={item} className="studio-equipment-item">
+                        {studio.details?.map((item, i) => (
+                          <div key={i} className="studio-equipment-item">
                             <Check className="studio-check-icon" />
                             <span>{item}</span>
                           </div>
                         ))}
                       </div>
+                      <p className="text-small mt-2" style={{ color: 'var(--canlens-silver)' }}>
+                        {t('studio.price_note')}
+                      </p>
                     </div>
 
                     {/* CTA */}
@@ -172,6 +175,12 @@ export function StudioRental() {
               </Card>
             </motion.div>
           ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <p className="text-body-large" style={{ color: 'var(--canlens-silver)' }}>
+            Prices may vary depending on project requirements, location, duration, and production complexity.
+          </p>
         </div>
 
         {/* FAQ */}
@@ -296,7 +305,7 @@ export function StudioRental() {
               </Select>
             </div>
 
-            {studio && bookingData.hours && (
+            {studio && bookingData.hours && studio.hourlyRate && (
               <div className="studio-total-price-box">
                 <div className="studio-total-flex">
                   <span className="studio-total-label">{t('studio.total_price')}</span>
