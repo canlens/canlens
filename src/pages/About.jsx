@@ -11,25 +11,25 @@ export function About() {
     {
       name: 'Mutasim Adam',
       role: t('about.role_founder'),
-      image: 'images/team/ceoMutasim.png',
+      image: 'images/team/mutasim.jpeg',
       bio: t('about.bio_founder'),
     },
     {
-      name: 'Grace Uwase',
+      name: 'Kevin Joe',
       role: t('about.role_creative'),
-      image: 'images/team/cmoUwase.png',
+      image: 'images/team/kevin.jpeg',
       bio: t('about.bio_creative'),
     },
     {
-      name: 'Patrick Niyonzima',
+      name: 'Brir Alhadi',
       role: t('about.role_technical'),
-      image: 'images/team/ctoPatrick.png',
+      image: 'images/team/brir.jpeg',
       bio: t('about.bio_technical'),
     },
     {
-      name: 'Diane Mutesi',
+      name: 'Abualgasim Adam',
       role: t('about.role_studio'),
-      image: 'images/team/cooDiane.png',
+      image: 'images/team/abualgasim.jpeg',
       bio: t('about.bio_studio'),
     },
   ];
