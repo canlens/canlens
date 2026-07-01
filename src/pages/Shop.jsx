@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
-import { Star, Heart, ShoppingCart, Search, Grid3x3, List } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Search, Grid3x3, List, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -19,6 +19,64 @@ import { useProducts } from '../hooks/useProducts';
 import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
 import '../styles/shop.css';
+
+function ProductImageCarousel({ images, alt, className = "shop-product-image" }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (!images || images.length === 0) return null;
+  if (images.length === 1) {
+    return <img src={images[0]} alt={alt} className={className} />;
+  }
+
+  const nextImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <div className="relative w-full h-full group/carousel overflow-hidden bg-gray-50/5 dark:bg-gray-900/10">
+      <img
+        src={images[currentIndex]}
+        alt={`${alt} - image ${currentIndex + 1}`}
+        className={className}
+      />
+      
+      <div className="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover/carousel:opacity-100 transition-opacity">
+        <button
+          onClick={prevImage}
+          className="bg-white/80 dark:bg-black/80 hover:bg-white dark:hover:bg-black rounded-full p-1.5 shadow-md backdrop-blur-md transition-all text-gray-900 dark:text-white"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+        <button
+          onClick={nextImage}
+          className="bg-white/80 dark:bg-black/80 hover:bg-white dark:hover:bg-black rounded-full p-1.5 shadow-md backdrop-blur-md transition-all text-gray-900 dark:text-white"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-10">
+        {images.map((_, idx) => (
+          <div
+            key={idx}
+            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+              idx === currentIndex ? 'bg-white scale-125' : 'bg-white/50'
+            }`}
+            style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function Shop() {
   const { t } = useTranslation();
@@ -227,11 +285,10 @@ export function Shop() {
                 <Link to={`/shop/${product.id}`}>
                   <Card className="premium-card shop-product-card group cursor-pointer h-full">
                     <div className="shop-product-image-wrapper">
-                      <img
-                        src={product.image || product.imageUrl}
-                        alt={product.name}
-                        className="shop-product-image"
-                      />
+                      {(() => {
+                        const images = (product.image || product.imageUrl)?.split(',').filter(Boolean) || [];
+                        return <ProductImageCarousel images={images} alt={product.name} />;
+                      })()}
 
                       <Button
                         size="icon"
@@ -298,12 +355,11 @@ export function Shop() {
               >
                 <Link to={`/shop/${product.id}`}>
                   <Card className="premium-card shop-list-card group cursor-pointer">
-                    <div className="shop-list-image-wrapper">
-                      <img
-                        src={product.image || product.imageUrl}
-                        alt={product.name}
-                        className="shop-list-image"
-                      />
+                    <div className="shop-list-image-wrapper relative">
+                      {(() => {
+                        const images = (product.image || product.imageUrl)?.split(',').filter(Boolean) || [];
+                        return <ProductImageCarousel images={images} alt={product.name} className="shop-list-image" />;
+                      })()}
                     </div>
                     <div className="shop-list-content">
                       <div className="shop-list-header">

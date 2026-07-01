@@ -79,13 +79,10 @@ export function About() {
               viewport={{ once: true }}
               className="about-story-images"
             >
+              <img src="/images/aboutCanlens.jpg" alt="our story" 
+              className='about-story-img1'/>
               <img
-                src="https://images.unsplash.com/photo-1556910633-5099dc3971e8?w=800&q=80"
-                alt="Studio"
-                className="about-story-img1"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1606980598821-4f0c4cc1c9c9?w=800&q=80"
+                src="/images/ourStory.jpg"
                 alt="Equipment"
                 className="about-story-img2"
               />

@@ -30,6 +30,7 @@
   grid-template-columns: 1fr;
   gap: 4rem;
   align-items: center;
+  padding: 1rem;
 }
 @media (min-width: 1024px) {
   .about-story-grid { grid-template-columns: repeat(2, 1fr); }
@@ -54,8 +55,7 @@
 .about-story-img2 {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-2xl);
-  width: 100%;
-  margin-top: 2rem;
+  height: 100%;
 }
 
 .about-mission-section {

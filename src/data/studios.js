@@ -5,7 +5,7 @@ export const studios = [
     description: 'Professional video production services tailored to your needs. Perfect for commercials, interviews, and content creation.',
     priceDisplay: 'Starting from 30,000 RWF',
     images: [
-      'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=1200&q=80',
+      '/images/content3.jpeg',
       'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&q=80',
       'https://images.unsplash.com/photo-1601843591781-df6c63ce7419?w=1200&q=80',
     ],
@@ -22,7 +22,7 @@ export const studios = [
     description: 'High-end podcast recording space with acoustic treatment and professional microphones. Perfect for interviews and roundtable discussions.',
     priceDisplay: '30,000 RWF / Hour',
     images: [
-      'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1200&q=80',
+      '/images/studio3.jpeg',
       'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=1200&q=80',
       'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1200&q=80',
     ],
@@ -39,7 +39,7 @@ export const studios = [
     description: 'Professional photography services for individuals and brands. Features professional lighting and backdrops for any occasion.',
     priceDisplay: 'Starting from 2,000 RWF',
     images: [
-      'https://images.unsplash.com/photo-1556910633-5099dc3971e8?w=1200&q=80',
+      '/images/content2.jpeg',
       'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1200&q=80',
       'https://images.unsplash.com/photo-1601843591781-df6c63ce7419?w=1200&q=80',
     ],
@@ -56,7 +56,7 @@ export const studios = [
     description: 'Comprehensive event coverage capturing your most important moments. Ideal for corporate events, parties, and large gatherings.',
     priceDisplay: 'Starting from 100,000 RWF',
     images: [
-      'https://images.unsplash.com/photo-1511578314322-379f0747d696?w=1200&q=80',
+      '/images/events.jpg',
       'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=1200&q=80',
       'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80',
     ],
@@ -74,7 +74,7 @@ export const studios = [
     description: 'Complete content creation packages designed for businesses and brands. Consistent, high-quality media for your marketing needs.',
     priceDisplay: 'Packages from 100,000 RWF',
     images: [
-      'https://images.unsplash.com/photo-1611329532458-45a498f58dfb?w=1200&q=80',
+      '/images/solutions.jpg',
       'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=1200&q=80',
       'https://images.unsplash.com/photo-1556910633-5099dc3971e8?w=1200&q=80',
     ],
