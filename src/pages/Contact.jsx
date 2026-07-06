@@ -22,6 +22,22 @@ export function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const messageText = `*New Contact Form Submission*
+
+*Name:* ${formData.name}
+*Email:* ${formData.email}
+*Phone:* ${formData.phone || 'N/A'}
+*Subject:* ${formData.subject}
+
+*Message:*
+${formData.message}`;
+
+    const encodedMessage = encodeURIComponent(messageText);
+    const whatsappUrl = `https://wa.me/250795458114?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
     toast.success(t('contact.toast_success'));
     setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
   };
@@ -61,7 +77,7 @@ export function Contact() {
                   <div>
                     <h3 className="contact-info-title">{t('contact.visit_us')}</h3>
                     <p className="contact-info-text">
-                      {t('contact.address_1')}<br />
+                      KK 12 Ave, Kigali<br />
                       {t('contact.address_2')}
                     </p>
                   </div>
@@ -82,8 +98,7 @@ export function Contact() {
                   <div>
                     <h3 className="contact-info-title">{t('contact.call_us')}</h3>
                     <p className="contact-info-text">
-                      +250 788 123 456<br />
-                      +250 788 654 321
+                      +250 795 458 114<br />
                     </p>
                   </div>
                 </div>
@@ -103,8 +118,7 @@ export function Contact() {
                   <div>
                     <h3 className="contact-info-title">{t('contact.email_us')}</h3>
                     <p className="contact-info-text">
-                      hello@canlensstudio.com<br />
-                      support@canlensstudio.com
+                      canlens9@gmail.com<br />
                     </p>
                   </div>
                 </div>
@@ -139,7 +153,7 @@ export function Contact() {
               transition={{ delay: 0.5 }}
             >
               <a
-                href="https://wa.me/250788123456"
+                href="https://wa.me/250795458114"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-whatsapp-link"
