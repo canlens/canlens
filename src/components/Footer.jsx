@@ -23,14 +23,11 @@ export function Footer() {
               {t('footer.brand_desc')}
             </p>
             <div className="footer-socials">
-              <a href="#" className="footer-social-link">
+              <a href="https://www.instagram.com/canlens_ltd/" target="_blank"  className="footer-social-link">
                 <Instagram className="icon-sm" />
               </a>
-              <a href="#" className="footer-social-link">
+              <a href="https://www.facebook.com/MutasimAdam088" target="_blank"  className="footer-social-link">
                 <Facebook className="icon-sm" />
-              </a>
-              <a href="#" className="footer-social-link">
-                <Twitter className="icon-sm" />
               </a>
             </div>
           </div>
