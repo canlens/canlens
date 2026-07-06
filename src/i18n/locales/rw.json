@@ -68,7 +68,27 @@
     },
     "testimonials": {
       "title": "Ibyo Abahanzi Bavuga",
-      "subtitle": "Byizerwa n'abafotora, abakora videwo, n'abakora ibihangano"
+      "subtitle": "Byizerwa n'abafotora, abakora videwo, n'abakora ibihangano",
+      "list": [
+        {
+          "name": "Yassin Alqnas",
+          "text": "Ni ahantu hatuje cyane, heza ho gufotolera."
+        },
+        {
+          "name": "Basheer",
+          "text": "Gufata amajwi ya podcast yanjye muri CanLens Studio byabaye ibihe byiza. Namaze gufatira hano ibice byinshi, kandi ntegereje gufata ibindi byinshi.\n\nUmwanya urisanzuye, ibikoresho ni bigezweho kandi byizewe, n'ubwiza bw'ibikorwa muri rusange bwabaye icyo nashakaga rwose.\n\nNdashimira by'umwihariko Mutasim kubw'ubunyamwuga bwe, ubufasha bwe, no koroha gukorana nawe. Ni nako bimeze kuri Kevin na Bereer - imyitwarire yabo myiza n'umwuka w'akazi byatumye buri gihe cyo gufata amajwi kiba gishimishije.\n\nNdashishikariza cyane CanLens Studio umuntu wese ushaka ahantu h'ubuhanzi, h'ubunyamwuga, kandi hakirana urugwiro kugira ngo ashyire mu bikorwa ibitekerezo bye."
+        },
+        {
+          "name": "Ahmed Esam",
+          "text": "Nshuti Mutasim, urakoze ku bugwaneza bwawe n'ubufasha bwawe mu gihe cyo gufata amashusho yacu.\n\nUbufasha bwawe mu kuduha ahantu heza byatumye akazi kacu koroha kandi kaba keza cyane.\n\nTurashimira by'ukuri ubuntu bwawe n'ubushake bwawe bwo kudufasha igihe cyose tubikeneye.\n\nUbufasha bwawe bwagize uruhare rukomeye mu gutuma byose bigenda neza.\n\nNkwifurije gukomeza kugira intsinzi, kandi urakoze kongera kugufasha."
+        },
+        {
+          "name": "Mohamed Abbas",
+          "text": "Dushingiye ku burambe bwanjye bwite, CanLens Studio ni ahantu heza cyane kuri:\n\n• Gukora ibiganiro\n• Gufotora ibirori\n• Umuntu wese ukunda ubuhanzi no kugaragara neza\n• Ubwiza buhanitse ku giciro cyiza"
+        }
+      ],
+      "viewMore": "Reba byinshi",
+      "viewLess": "Reba bike"
     },
     "brands": {
       "title": "Umucuruzi Wemewe Wa"

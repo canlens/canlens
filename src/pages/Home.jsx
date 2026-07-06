@@ -12,10 +12,66 @@ import {
   Quote,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { useProducts } from "../hooks/useProducts";
 import "../styles/home.css";
+
+const TestimonialItem = ({ testimonial }) => {
+  const { t } = useTranslation();
+  const [expanded, setExpanded] = useState(false);
+  const [isLong, setIsLong] = useState(false);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    if (textRef.current) {
+      if (textRef.current.scrollHeight > 90) {
+        setIsLong(true);
+      }
+    }
+  }, [testimonial.text]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="testimonial-card-wrapper"
+    >
+      <Card className="glass-card testimonial-card">
+        <Quote className="quote-icon" />
+        <div className="testimonial-content-wrapper">
+          <div 
+            className={`testimonial-text-container ${!expanded && isLong ? 'collapsed' : ''}`}
+            style={{ maxHeight: expanded ? '1000px' : (isLong ? '84px' : 'none') }}
+          >
+            <p className={`testimonial-text ${!expanded && isLong ? 'clamped' : ''}`} ref={textRef}>
+              {testimonial.text}
+            </p>
+            {!expanded && isLong && <div className="text-fade-overlay" />}
+          </div>
+          {isLong && (
+            <button 
+              className="view-more-btn" 
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? t("home.testimonials.viewLess", "View Less") : t("home.testimonials.viewMore", "View More")}
+            </button>
+          )}
+        </div>
+        <div className="testimonial-author">
+          <div className="author-avatar">
+            {testimonial.name.charAt(0).toUpperCase()}
+          </div>
+          <div>
+            <p className="author-name">{testimonial.name}</p>
+          </div>
+        </div>
+      </Card>
+    </motion.div>
+  );
+};
 
 export function Home() {
   const { t } = useTranslation();
@@ -41,29 +97,7 @@ export function Home() {
     { name: "Rode", logo: "RODE" },
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah Mugisha",
-      role: "Content Creator",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
-      text: "CanLens Studio has everything I need. The equipment quality is top-notch and the studio rental service is incredibly professional.",
-    },
-    {
-      name: "Jean-Paul Nkunda",
-      role: "Wedding Photographer",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
-      text: "Best photography equipment store in Kigali. Their team knows their stuff and always helps me find exactly what I need.",
-    },
-    {
-      name: "Aisha Nsabimana",
-      role: "Video Producer",
-      image:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80",
-      text: "The podcast studio is amazing! Professional setup, great acoustics, and affordable rates. Highly recommend for any creator.",
-    },
-  ];
+
 
   return (
     <div className="home-page">
@@ -394,31 +428,8 @@ export function Home() {
           </motion.div>
 
           <div className="testimonials-grid">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="testimonial-card-wrapper"
-              >
-                <Card className="glass-card testimonial-card">
-                  <Quote className="quote-icon" />
-                  <p className="testimonial-text">{testimonial.text}</p>
-                  <div className="testimonial-author">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="author-image"
-                    />
-                    <div>
-                      <p className="author-name">{testimonial.name}</p>
-                      <p className="author-role">{testimonial.role}</p>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
+            {t("home.testimonials.list", { returnObjects: true }).map((testimonial, index) => (
+              <TestimonialItem key={testimonial.name} testimonial={testimonial} />
             ))}
           </div>
         </div>

@@ -68,7 +68,27 @@
     },
     "testimonials": {
       "title": "What Creators Say",
-      "subtitle": "Trusted by photographers, videographers, and content creators"
+      "subtitle": "Trusted by photographers, videographers, and content creators",
+      "list": [
+        {
+          "name": "Yassin Alqnas",
+          "text": "Very quiet place, suitable for photography."
+        },
+        {
+          "name": "Basheer",
+          "text": "Recording my cinematic podcast at CanLens Studio has been a great experience. I've already recorded several episodes here, and I'm looking forward to shooting many more.\n\nThe space is comfortable, the equipment is modern and reliable, and the overall production quality has been exactly what I was looking for.\n\nA special thanks to Mutasim for being incredibly professional, supportive, and easy to work with. The same goes for Kevin and Bereer—their positive attitude and teamwork made every recording session enjoyable.\n\nI highly recommend CanLens Studio to anyone looking for a creative, professional, and welcoming place to bring their ideas to life."
+        },
+        {
+          "name": "Ahmed Esam",
+          "text": "Dear Mutasim, thank you for your kindness and support during our video shoots.\n\nYour help in providing us with the right place made our work much easier and more comfortable.\n\nWe truly appreciate your generosity and willingness to assist us whenever needed.\n\nYour support played an important role in making everything go smoothly.\n\nWishing you continued success, and thank you once again for your valuable help."
+        },
+        {
+          "name": "Mohamed Abbas",
+          "text": "Based on my personal experience, CanLens Studio is the best place for:\n\n• Content creation\n• Event photography\n• Anyone who loves creativity and standing out\n• Great quality at affordable prices"
+        }
+      ],
+      "viewMore": "View More",
+      "viewLess": "View Less"
     },
     "brands": {
       "title": "Authorized Dealer For"
