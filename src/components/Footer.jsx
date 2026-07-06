@@ -72,15 +72,15 @@ export function Footer() {
             <ul className="footer-contact">
               <li className="footer-contact-item">
                 <MapPin className="footer-contact-icon" />
-                <span>{t('footer.address')}</span>
+                <span>KK 12 Ave, Kigali</span>
               </li>
               <li className="footer-contact-item">
                 <Phone className="footer-contact-icon" />
-                <a href="tel:+250788123456" className="footer-link">+250 788 123 456</a>
+                <a href="tel:+250788123456" className="footer-link">+250 795 458 114</a>
               </li>
               <li className="footer-contact-item">
                 <Mail className="footer-contact-icon" />
-                <a href="mailto:hello@canlensstudio.com" className="footer-link">hello@canlensstudio.com</a>
+                <a href="mailto:canlens9@gmail.com" className="footer-link">canlens9@gmail.com</a>
               </li>
             </ul>
           </div>
